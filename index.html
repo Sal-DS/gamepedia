@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUIZ SENAI</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-image: url('imgs/marioimg.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
+            font-family: 'Trebuchet MS', sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header, footer {
+            background-color: #ffffff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 5%;
+        }
+
+        header img {
+            max-height: 50px;
+        }
+
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #333;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: rgb(61, 106, 255);
+        }
+
+        .hero-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin-top: 10vh;
+            padding: 0 5%;
+        }
+
+        .hero-section h1 {
+            font-size: 4rem;
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero-section h2 {
+            font-size: 2rem;
+            color: #ffffff;
+            margin-bottom: 1rem;
+        }
+
+        input {
+            width: 50%;
+            padding: 12px 20px;
+            border-radius: 8px;
+            border: 2px solid #ddd;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        input:focus {
+            border-color: rgb(61, 106, 255);
+            box-shadow: 0 0 8px rgba(61, 106, 255, 0.3);
+        }
+
+        button {
+            padding: 18px;
+            border-radius: 8px;
+            border: none;
+            background-color: rgb(61, 106, 255);
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            letter-spacing: 1px;
+            transition: background-color 0.3s, box-shadow 0.3s;
+            width: 50%;
+        }
+
+        button:hover {
+            background-color: rgb(30, 80, 230);
+            box-shadow: 0 4px 12px rgba(30, 80, 230, 0.4);
+        }
+
+        .about-section,
+        .contact-section {
+            background-color: rgba(255, 255, 255, 0.95);
+            width: 100%;
+            max-width: 400px;
+            min-height: 260px;
+            margin: 20px;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .about-section h1,
+        .contact-section h1 {
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .about-section h3,
+        .contact-section h3 {
+            color: #555;
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+
+        footer {
+            justify-content: center;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #777;
+            padding: 2rem 5%;
+        }
+
+        .row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 40px 5%;
+        }
+
+        .cato {
+            height: 180px;
+            width: 220px;
+            object-fit: cover;
+            animation: float 2s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @media (max-width: 900px) {
+            .hero-section h1 {
+                font-size: 3rem;
+            }
+
+            .hero-section h2 {
+                font-size: 1.5rem;
+            }
+
+            input, button {
+                font-size: 1rem;
+            }
+
+            .cato {
+                height: 150px;
+                width: 180px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <script src="script.js">
+    </script>
+    <header>
+        <img src="imgs/gamepedia.com.png" alt="logo do senai">
+        <nav>
+            <a href="index.html">Início</a>
+            <a href="index.html">Sobre</a>
+            <a href="index.html">Contato</a>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <div class="hero-section">
+        <h1>SEJA BEM-VINDO, JOGADOR!</h1>
+        <h2>PESQUISE SEU JOGO AQUI:</h2>
+        <input id="t" type="text" placeholder="Ex: 'League of Legends'">
+        <button onclick="salvar()" type="button">BUSCAR</button>
+    </div>
+
+    <div class="row">
+        <div class="about-section">
+            <h1>SOBRE NÓS!</h1>
+            <h3>Somos alunos do Curso de Desenvolvimento de Sistemas do Senai de Cachoeiro de Itapemirim-ES e este projeto mostra um pouco o que aprendemos.</h3>
+        </div>
+
+        <img class="cato" src="https://media.giphy.com/media/YPJ5ew1ss91MpktBrT/giphy.gif" alt="Alerta gato">
+
+        <div class="contact-section">
+            <h1>ENVIE-NOS UM EMAIL!</h1>
+            <h3>Entre em contato com os desenvolvedores:<br>matheus.g.saldanha@aluno.senai.br<br>jefferson.v.silva12@aluno.senai.br<br>daniel.a.almeida@aluno.senai.br</h3>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2025 SENAI - Serviço Nacional de Aprendizagem Industrial. Todos os direitos reservados.
+    </footer>
+</body>
+</html>

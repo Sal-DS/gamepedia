@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>QUIZ SENAI</title>
+  <style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: rgb(0, 0, 0);
+    font-size: large;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background-image: url('imgs/marioimg.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header, footer {
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 5%;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+header img {
+    max-height: 50px;
+}
+
+nav a {
+    margin: 0 15px;
+    text-decoration: none;
+    color: #333;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: rgb(61, 106, 255);
+}
+
+.hero-section {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+    margin-top: 4vh;
+    padding: 0 5%;
+    margin-bottom: 5vh;
+}
+
+.hero-section h2 {
+    font-size: 2rem;
+    color: #fff;
+    margin-bottom: 1rem;
+}
+
+#word {
+    background-color: #fffffff5;
+    padding: 30px;
+    max-width: 150vh;
+    margin-top: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: #000;
+    text-align: justify;
+}
+
+#paodequeijo {
+    font-weight: bold;
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+footer {
+    justify-content: center;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #777;
+    padding: 2rem 5%;
+}
+
+@media (max-width: 900px) {
+    .hero-section h2 {
+        font-size: 1.5rem;
+    }
+}
+h2 {
+    font-size: 2rem;
+    color: #111;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 0.4rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 0 #eee;
+}
+
+h3{
+    font-size: 2rem;
+    color: #222;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+    padding-left: 0.8rem;
+    border-left: 5px solid #aaa;
+    transition: all 0.3s ease;
+}
+
+h4, h5, h6{
+  font-size: 1.5rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: #222;
+  padding-left: 0.8rem;
+  border-left: 3px solid #eee
+  
+}
+
+#termo{
+  color: rgb(255, 255, 255);
+  font-size: 2.5vh;
+}
+
+  </style>
+</head>
+<body>
+
+<header>
+  <img src="imgs/gamepedia.com.png" alt="logo do senai" />
+  <nav>
+    <a href="index.html">Início</a>
+    <a href="index.html">Sobre</a>
+    <a href="index.html">Contato</a>
+  </nav>
+</header>
+
+<!-- Hero -->
+<div class="hero-section">
+  <h2 id="paodequeijo">SOBRE <span id="termo"></span></h2>
+  <div id="word"></div>
+</div>
+
+<footer>
+  &copy; 2025 SENAI - Serviço Nacional de Aprendizagem Industrial. Todos os direitos reservados.
+</footer>
+
+<script>
+
+function formatarTextoEmHTML(textoBruto) {
+    const titulosIgnorados = [
+        "Ver também",
+        "Ligações externas",
+        "Referências",
+        "Notas",
+        "Bibliografia",
+        "Outras leituras",
+        "Leitura adicional",
+        "Fontes",
+        "Links externos",
+        "Notas e referências",
+        "Notas de rodapé",
+        "Ver ainda",
+        "Apêndice",
+        "Agradecimentos",
+        "Anexos",
+        "Artigos relacionados",
+        "Referências e notas",
+        "Ver também:",
+        "Links relacionados",
+        "Sugestões de leitura",
+        "Publicações adicionais",
+        "Outros projetos",
+        "Ver mais"
+    ];
+
+    const linhas = textoBruto.split('\n');
+    let htmlFormatado = '';
+    let paragrafoAtual = '';
+    let ignorandoSecao = false;
+
+    for (let i = 0; i < linhas.length; i++) {
+        let linha = linhas[i].trim();
+
+        // Título de seção?
+        if (/^=+ .+ =+$/.test(linha)) {
+            if (paragrafoAtual) {
+                htmlFormatado += `<p>${paragrafoAtual.trim()}</p>\n`;
+                paragrafoAtual = '';
+            }
+
+            const nivel = linha.match(/^=+/)[0].length;
+            const conteudo = linha.replace(/^=+/, '').replace(/=+$/, '').trim();
+            const tag = `h${Math.min(nivel + 1, 6)}`;
+
+            // Verifica se o título está na lista de ignorados e a próxima linha é vazia ou um próximo título
+            const proximaLinha = linhas[i + 1]?.trim();
+            if (
+                titulosIgnorados.includes(conteudo) &&
+                (!proximaLinha || /^=+ .+ =+$/.test(proximaLinha))
+            ) {
+                ignorandoSecao = true;
+                continue;
+            } else {
+                ignorandoSecao = false;
+            }
+
+            if (!ignorandoSecao) {
+                htmlFormatado += `<${tag}>${conteudo}</${tag}>\n`;
+            }
+        }
+
+        // Linha em branco
+        else if (linha === '') {
+            if (paragrafoAtual) {
+                htmlFormatado += `<p>${paragrafoAtual.trim()}</p>\n`;
+                paragrafoAtual = '';
+            }
+        }
+
+        // Conteúdo normal
+        else {
+            if (!ignorandoSecao) {
+                paragrafoAtual += linha + ' ';
+            }
+        }
+    }
+
+    // Finaliza último parágrafo
+    if (paragrafoAtual) {
+        htmlFormatado += `<p>${paragrafoAtual.trim()}</p>\n`;
+    }
+
+    return htmlFormatado;
+}
+
+  let t = localStorage.getItem("savedTerm");
+  document.getElementById("termo").textContent = t;
+
+  const xhttp = new XMLHttpRequest();
+  xhttp.onload = function () {
+    const r = this.responseText;
+    const objResponse = JSON.parse(r);
+
+    if (objResponse && objResponse.query && objResponse.query.pages) {
+      const wikiPage = objResponse.query.pages[Object.keys(objResponse.query.pages)[0]];
+      const mainText = wikiPage["extract"];
+      if (mainText && mainText.toLowerCase().includes("jogo")) {
+        document.getElementById("word").innerHTML = formatarTextoEmHTML(mainText);
+      } else {
+        document.getElementById("word").innerHTML = "Não encontrei explicação para " + t;
+      }
+    }
+  };
+
+  xhttp.open("GET", "https://pt.wikipedia.org/w/api.php?format=json&origin=*&action=query&prop=extracts&explaintext=1&titles=" + t);
+  xhttp.send();
+</script>
+
+</body>
+</html>
