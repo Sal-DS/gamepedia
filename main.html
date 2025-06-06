@@ -68,7 +68,7 @@ nav a:hover {
     margin-bottom: 1rem;
 }
 
-#word {
+#paodealho {
     background-color: #fffffff5;
     padding: 30px;
     max-width: 150vh;
@@ -153,7 +153,10 @@ h4, h5, h6{
 <!-- Hero -->
 <div class="hero-section">
   <h2 id="paodequeijo">SOBRE <span id="termo"></span></h2>
-  <div id="word"></div>
+  <div id="paodealho">
+    <h3>Introdução</h3>
+    <div id="word"></div>
+  </div>
 </div>
 
 <footer>
@@ -197,7 +200,6 @@ function formatarTextoEmHTML(textoBruto) {
     for (let i = 0; i < linhas.length; i++) {
         let linha = linhas[i].trim();
 
-        // Título de seção?
         if (/^=+ .+ =+$/.test(linha)) {
             if (paragrafoAtual) {
                 htmlFormatado += `<p>${paragrafoAtual.trim()}</p>\n`;
@@ -208,7 +210,6 @@ function formatarTextoEmHTML(textoBruto) {
             const conteudo = linha.replace(/^=+/, '').replace(/=+$/, '').trim();
             const tag = `h${Math.min(nivel + 1, 6)}`;
 
-            // Verifica se o título está na lista de ignorados e a próxima linha é vazia ou um próximo título
             const proximaLinha = linhas[i + 1]?.trim();
             if (
                 titulosIgnorados.includes(conteudo) &&
@@ -241,7 +242,6 @@ function formatarTextoEmHTML(textoBruto) {
         }
     }
 
-    // Finaliza último parágrafo
     if (paragrafoAtual) {
         htmlFormatado += `<p>${paragrafoAtual.trim()}</p>\n`;
     }
